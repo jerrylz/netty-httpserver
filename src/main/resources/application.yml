@@ -1,0 +1,10 @@
+#spring:
+#  application:
+#    name: netty
+#  profiles:
+#    active: eureka,eureka-zone,sleuth,file-upload,security
+server:
+  session:
+    timeout: 5000
+  port: 8081
+  server-header: netty-server/1.0.0
