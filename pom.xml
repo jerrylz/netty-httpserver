@@ -2,14 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.wangzihaogithub</groupId>
+    <groupId>com.abchina</groupId>
     <artifactId>netty-container</artifactId>
     <version>1.1.14-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Netty Container</name>
     <description>Netty Servlet Container</description>
-    <url>https://github.com/wangzihaogithub/netty-container.git</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,30 +21,6 @@
         <jackson.version>2.12.1</jackson.version>
         <!--<javaHome>C:\Program Files\Java\jdk1.8.0_74</javaHome>-->
     </properties>
-
-    <licenses>
-        <license>
-            <name>The Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
-    <scm>
-        <tag>netty-container-1.1.14</tag>
-        <connection>scm:git:https://github.com/wangzihaogithub/netty-container.git</connection>
-        <developerConnection>scm:git:https://github.com/wangzihaogithub/netty-container.git</developerConnection>
-        <url>https://github.com/wangzihaogithub/netty-container</url>
-    </scm>
-
-    <!-- 开发者信息 -->
-    <developers>
-        <developer>
-            <id>wangzihao</id>
-            <name>wangzihao</name>
-            <email>842156727@qq.com</email>
-        </developer>
-    </developers>
-
 
     <dependencies>
         <dependency>

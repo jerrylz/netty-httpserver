@@ -1,8 +1,3 @@
-#spring:
-#  application:
-#    name: netty
-#  profiles:
-#    active: eureka,eureka-zone,sleuth,file-upload,security
 server:
   session:
     timeout: 5000
