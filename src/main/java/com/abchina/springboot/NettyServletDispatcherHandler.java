@@ -49,7 +49,6 @@ public class NettyServletDispatcherHandler extends SimpleChannelInboundHandler<S
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        System.out.println("exceptionCaught");
         if(null != cause) {
             cause.printStackTrace();
         }

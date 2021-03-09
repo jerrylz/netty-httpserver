@@ -6,13 +6,13 @@ import io.netty.channel.ChannelException;
 import io.netty.channel.ChannelFactory;
 
 /**
+ *
  */
 public class NioServerChannelFactory implements ChannelFactory<NioServerSocketChannel> {
 
     @Override
     public NioServerSocketChannel newChannel() {
         try {
-//            MyNioServerSocketChannel myNioServerSocketChannel = new MyNioServerSocketChannel(eventLoop,childGroup);
             NioServerSocketChannel myNioServerSocketChannel = ProxyUtil.newProxyByCglib(NioServerSocketChannel.class,
                     toString() + "-"+ NamespaceUtil.newIdName(this,"serverSocketChannel"),
                     true);

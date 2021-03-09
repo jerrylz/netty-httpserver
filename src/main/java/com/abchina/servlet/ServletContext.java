@@ -2,7 +2,6 @@ package com.abchina.servlet;
 
 import com.abchina.util.MimeTypeUtil;
 import com.abchina.util.NamespaceUtil;
-import com.abchina.util.TodoOptimize;
 import com.abchina.core.constants.HttpConstants;
 import com.abchina.util.TypeUtil;
 import org.slf4j.Logger;
@@ -39,7 +38,6 @@ public class ServletContext implements javax.servlet.ServletContext {
 
     private ExecutorService asyncExecutorService;
 
-    @TodoOptimize("事件")
     private List<EventListener> eventListenerList;
     private Set<SessionTrackingMode> sessionTrackingModeSet;
 
@@ -488,9 +486,6 @@ public class ServletContext implements javax.servlet.ServletContext {
 
         if (t instanceof HttpSessionListener
                 || (t instanceof ServletContextListener)) {
-            // Add listener directly to the list of instances rather than to
-            // the list of class names.
-//            eventListenerList.add(t);
             match = true;
         }
 

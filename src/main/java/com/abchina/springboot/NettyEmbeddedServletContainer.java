@@ -14,6 +14,8 @@ import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslHandler;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.EventExecutorGroup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.embedded.EmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerException;
 import org.springframework.boot.context.embedded.Ssl;
@@ -28,20 +30,14 @@ import java.util.Map;
  *
  */
 public class NettyEmbeddedServletContainer extends AbstractNettyServer implements EmbeddedServletContainer {
-
+    private static Logger log = LoggerFactory.getLogger(NettyEmbeddedServletContainer.class);
     private ServletContext servletContext;
     private EventExecutorGroup dispatcherExecutorGroup;
-    private final boolean enableSsl;
-    private SslContext sslContext;
     private ChannelHandler dispatcherHandler;
 
     public NettyEmbeddedServletContainer(ServletContext servletContext,Ssl ssl,int bizThreadCount) throws SSLException {
         super(servletContext.getServerSocketAddress());
         this.servletContext = servletContext;
-        this.enableSsl = ssl != null && ssl.isEnabled();
-        if(enableSsl){
-            this.sslContext = newSslContext(ssl);
-        }
         this.dispatcherExecutorGroup = new DefaultEventExecutorGroup(bizThreadCount);
         this.dispatcherHandler = new NettyServletDispatcherHandler(servletContext);
     }
@@ -52,12 +48,6 @@ public class NettyEmbeddedServletContainer extends AbstractNettyServer implement
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
                 ChannelPipeline pipeline = ch.pipeline();
-
-                if (enableSsl) {
-                    SSLEngine engine = sslContext.newEngine(ch.alloc());
-                    engine.setUseClientMode(false);//是否客户端
-                    pipeline.addLast("SSL", new SslHandler(engine));
-                }
 
                 pipeline.addLast("HttpCodec", new HttpServerCodec(4096, 8192, 8192, false)); //HTTP编码解码Handler
                 pipeline.addLast("Aggregator", new HttpObjectAggregator(512 * 1024));  // HTTP聚合，设置最大消息值为512KB
@@ -82,7 +72,7 @@ public class NettyEmbeddedServletContainer extends AbstractNettyServer implement
         });
         serverThread.start();
 
-        System.out.println("启动成功 "+serverInfo+"["+getPort()+"]...");
+        log.info("启动成功{}[{}]", serverInfo, getPort());
     }
 
     private void loadResources(){

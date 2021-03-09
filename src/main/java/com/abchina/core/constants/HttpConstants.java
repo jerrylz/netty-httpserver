@@ -3,7 +3,7 @@ package com.abchina.core.constants;
 import java.nio.charset.Charset;
 
 /**
- *
+ * HTTP常量
  */
 public class HttpConstants {
 
